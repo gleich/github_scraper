@@ -1,19 +1,17 @@
 <!-- DO NOT REMOVE - contributor_list:data:start:["Matt-Gleich"]:end -->
 
-# Run `init.py`
+# github_scraper
 
-# project_name
+🗄  GitHub scraper for my GraphQL API
 
-project_description
-
-![build](https://github.com/github_username/project_name/workflows/build/badge.svg)
-![test](https://github.com/github_username/project_name/workflows/test/badge.svg)
-![lint](https://github.com/github_username/project_name/workflows/lint/badge.svg)
-![release](https://github.com/github_username/project_name/workflows/release/badge.svg)
+![build](https://github.com/Matt-Gleich/github_scraper/workflows/build/badge.svg)
+![test](https://github.com/Matt-Gleich/github_scraper/workflows/test/badge.svg)
+![lint](https://github.com/Matt-Gleich/github_scraper/workflows/lint/badge.svg)
+![release](https://github.com/Matt-Gleich/github_scraper/workflows/release/badge.svg)
 
 ## 🙌 Contributing
 
-Before contributing please read the [CONTRIBUTING.md file](https://github.com/Matt-Gleich/project_name/blob/master/CONTRIBUTING.md).
+Before contributing please read the [CONTRIBUTING.md file](https://github.com/Matt-Gleich/github_scraper/blob/master/CONTRIBUTING.md).
 
 <!-- DO NOT REMOVE - contributor_list:start -->
 ## 👥 Contributors

@@ -1,8 +1,8 @@
-module github.com/github_username/project_name
+module github.com/Matt-Gleich/github_scraper
 
 go 1.15
 
 require (
-	github.com/Matt-Gleich/logoru v0.0.0-20200817001912-097ac1695c5f
-	golang.org/x/sys v0.0.0-20200817155316-9781c653f443 // indirect
+	github.com/Matt-Gleich/logoru v0.0.0-20210118023455-2a97bedf0e1d
+	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
 )
