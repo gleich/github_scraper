@@ -2,7 +2,7 @@ FROM golang:1.15
 
 # Meta data:
 LABEL maintainer="email@mattglei.ch"
-LABEL description="🗄  GitHub scraper for my GraphQL API"
+LABEL description="🗄 GitHub scraper for my GraphQL API"
 
 # Copying over all the files:
 COPY . /usr/src/app
