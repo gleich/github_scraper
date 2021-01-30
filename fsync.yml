@@ -3,7 +3,7 @@ replace:
   - before: project_name
     after: github_scraper
   - before: project_description
-    after: 🗄  GitHub scraper for my GraphQL API
+    after: 🗄 GitHub scraper for my GraphQL API
   - before: github_username
     after: Matt-Gleich
   - before: project_author_email
