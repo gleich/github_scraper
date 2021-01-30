@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  github_scraper:
+    build:
+      context: .
+      dockerfile: docker/dev.Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+    environment:
+      DB_URL: 'postgres://postgres:password@postgres:5432/api'
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    volumes:
+      - 'db_volume:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: api
+  pgweb:
+    image: sosedoff/pgweb
+    ports:
+      - '8081:8081'
+    environment:
+      DATABASE_URL: postgres://postgres:password@postgres:5432/api?sslmode=disable
+    depends_on:
+      - postgres
+volumes:
+  db_volume:
