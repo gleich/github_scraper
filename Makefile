@@ -10,7 +10,7 @@ build-docker-dev-lint:
 	docker build -f docker/dev.lint.Dockerfile -t mattgleich/github_scraper:lint .
 build-go:
 	go get -v -t -d ./...
-	go build -v .
+	go build -v ./cmd/github_scraper
 	rm github_scraper
 
 #########
