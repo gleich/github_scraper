@@ -12,7 +12,7 @@ WORKDIR /usr/src/app
 RUN go get -v -t -d ./...
 
 # Build the app
-RUN go build -o app .
+RUN go build -o app ./cmd/github_scraper
 
 # hadolint ignore=DL3006,DL3007
 FROM alpine:latest
