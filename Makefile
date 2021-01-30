@@ -40,6 +40,13 @@ test-go:
 test-in-docker: build-docker-dev
 	docker run mattgleich/github_scraper:test
 
+###################
+# Local Development
+###################
+
+dev-start:
+	docker-compose up -d postgres && docker-compose up -d pgweb && docker-compose up github_scraper
+
 ##########
 # Grouping
 ##########
