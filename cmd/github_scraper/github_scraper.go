@@ -14,5 +14,7 @@ func main() {
 	client := gh_api.GenClient()
 
 	// Getting account information
-	account.GetData(client)
+	rawAccountData := account.GetData(client)
+	formattedAccountData := account.CleanData(rawAccountData)
+	account.Insert(formattedAccountData)
 }

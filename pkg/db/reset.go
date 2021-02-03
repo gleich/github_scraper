@@ -6,6 +6,7 @@ import (
 	"github.com/Matt-Gleich/lumber"
 )
 
+// Delete and create a given table
 func ResetTable(createQuery string, tableName string) {
 	if tableExists(tableName) {
 		_, err := DB.Exec(fmt.Sprintf("DROP TABLE %v;", tableName))
