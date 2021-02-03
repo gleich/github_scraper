@@ -2,8 +2,8 @@ package account
 
 import "github.com/shurcooL/githubv4"
 
-// Query to get github account information
-type Outline struct {
+// Data from github
+type ApiData struct {
 	Viewer struct {
 		Login     githubv4.String
 		Followers struct {
@@ -20,7 +20,6 @@ type Outline struct {
 		}
 		WebsiteURL              githubv4.String
 		Company                 githubv4.String
-		Bio                     githubv4.String
 		ContributionsCollection struct {
 			TotalRepositoryContributions                       githubv4.Int
 			TotalRepositoriesWithContributedPullRequests       githubv4.Int
@@ -33,4 +32,18 @@ type Outline struct {
 			TotalIssueContributions                            githubv4.Int
 		}
 	}
+}
+
+// Cleaned data
+type Data struct {
+	Followers     int
+	Email         string
+	Username      string
+	Repos         int
+	Contributors  int
+	Hireable      bool
+	Location      string
+	Organizations int
+	Website       string
+	Company       string
 }

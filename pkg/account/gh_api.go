@@ -8,9 +8,9 @@ import (
 )
 
 // Get account data from GitHub
-func GetData(client *githubv4.Client) Outline {
+func GetData(client *githubv4.Client) ApiData {
 	lumber.Info("Getting account data")
-	var data Outline
+	var data ApiData
 	err := client.Query(context.Background(), &data, nil)
 	lumber.Error(err, "Failed to get github account data")
 	lumber.Success("Got account data!")
