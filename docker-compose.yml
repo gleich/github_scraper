@@ -11,6 +11,7 @@ services:
       DB_URL: 'postgres://postgres:password@postgres:5432/api'
     depends_on:
       - postgres
+    env_file: .env
   postgres:
     image: postgres
     environment:
