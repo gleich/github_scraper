@@ -15,6 +15,12 @@ CREATE TABLE %v (
 	email varchar(255),
 	username varchar(255),
 	repos int,
-	contributors int
+	contributors int,
+	hireable bool,
+	location varchar(255),
+	organizations int,
+	website varchar(255),
+	company varchar(255),
+	bio varchar(255)
 );`, TableName,
 )
