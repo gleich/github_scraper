@@ -29,11 +29,11 @@ func Connect() {
 		dbURL.Port(),
 	)
 	DB, err = sql.Open("postgres", postgresInfo)
-	lumber.Error(err, "Failed to validate to postgres info:", postgresInfo)
+	lumber.Fatal(err, "Failed to validate to postgres info:", postgresInfo)
 
 	// Verifying connection to database
 	err = DB.Ping()
-	lumber.Error(err, "Failed to connect to database")
+	lumber.Fatal(err, "Failed to connect to database")
 
 	lumber.Info("Connected to database")
 }
