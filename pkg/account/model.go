@@ -40,7 +40,7 @@ type Data struct {
 	Email         string
 	Username      string
 	Repos         int
-	Contributors  int
+	Contributions int
 	Hireable      bool
 	Location      string
 	Organizations int

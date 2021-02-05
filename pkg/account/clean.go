@@ -12,7 +12,7 @@ func CleanData(apiData ApiData) Data {
 		Organizations: int(apiData.Viewer.Organizations.TotalCount),
 		Website:       string(apiData.Viewer.WebsiteURL),
 		Company:       string(apiData.Viewer.Company),
-		Contributors: (int(apiData.Viewer.ContributionsCollection.TotalRepositoryContributions) +
+		Contributions: (int(apiData.Viewer.ContributionsCollection.TotalRepositoryContributions) +
 			int(apiData.Viewer.ContributionsCollection.TotalRepositoriesWithContributedPullRequests) +
 			int(apiData.Viewer.ContributionsCollection.TotalRepositoriesWithContributedPullRequestReviews) +
 			int(apiData.Viewer.ContributionsCollection.TotalRepositoriesWithContributedIssues) +

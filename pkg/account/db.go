@@ -18,7 +18,7 @@ CREATE TABLE %v (
 	email varchar(255),
 	username varchar(255),
 	repos int,
-	contributors int,
+	contributions int,
 	hireable bool,
 	location varchar(255),
 	organizations int,
@@ -28,12 +28,17 @@ CREATE TABLE %v (
 )
 
 func Insert(data Data) {
-	_, err := db.DB.Exec(fmt.Sprintf(
+	// Reset table
+	_, err := db.DB.Exec(fmt.Sprintf("TRUNCATE TABLE %v;", TableName))
+	lumber.Fatal(err, "Failed to truncate", TableName)
+
+	// Inserting data
+	_, err = db.DB.Exec(fmt.Sprintf(
 		` INSERT INTO %v (followers,
 			email,
 			username,
 			repos,
-			contributors,
+			contributions,
 			hireable,
 			location,
 			organizations,
@@ -44,10 +49,10 @@ func Insert(data Data) {
 		`,
 		TableName,
 		data.Followers,
-		data.Username,
 		data.Email,
+		data.Username,
 		data.Repos,
-		data.Contributors,
+		data.Contributions,
 		data.Hireable,
 		data.Location,
 		data.Organizations,
