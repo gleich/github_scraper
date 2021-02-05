@@ -26,7 +26,7 @@ type ApiData struct {
 
 // A GitHub Project
 type Data struct {
-	ProjectName   string
+	Name          string
 	URL           string
 	MainLangName  string
 	MainLangColor string

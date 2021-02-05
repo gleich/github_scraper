@@ -45,7 +45,9 @@ func main() {
 
 		for _, project := range gitHubProjects {
 			rawProjectData := projects.GetData(project.Name, project.Owner)
-			fmt.Println(rawProjectData)
+			formattedProjectData := projects.CleanData(rawProjectData)
+			fmt.Println(formattedProjectData)
+			db.ResetTable(projects.TableName)
 		}
 
 		time.Sleep(5 * time.Minute)
