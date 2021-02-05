@@ -28,12 +28,8 @@ CREATE TABLE %v (
 )
 
 func Insert(data Data) {
-	// Reset table
-	_, err := db.DB.Exec(fmt.Sprintf("TRUNCATE TABLE %v;", TableName))
-	lumber.Fatal(err, "Failed to truncate", TableName)
-
 	// Inserting data
-	_, err = db.DB.Exec(fmt.Sprintf(
+	_, err := db.DB.Exec(fmt.Sprintf(
 		` INSERT INTO %v (followers,
 			email,
 			username,

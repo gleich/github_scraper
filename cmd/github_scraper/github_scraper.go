@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/Matt-Gleich/github_scraper/pkg/account"
@@ -9,19 +10,43 @@ import (
 	"github.com/Matt-Gleich/github_scraper/pkg/projects"
 )
 
+// All SQL tables used by this microservice
+var tables = []db.Table{
+	{
+		Name:        account.TableName,
+		CreateQuery: account.CreateQuery,
+	},
+	{
+		Name:        projects.TableName,
+		CreateQuery: projects.CreateQuery,
+	},
+}
+
+// All projects
+var gitHubProjects = []projects.Project{
+	{Name: "fgh", Owner: "Matt-Gleich"},
+}
+
 func main() {
 	// Connecting to db and resetting tables
 	db.Connect()
-	db.ResetTable(account.CreateQuery, account.TableName)
-	db.ResetTable(projects.CreateQuery, projects.TableName)
+	for _, table := range tables {
+		db.HardResetTable(table.CreateQuery, table.Name)
+	}
 
-	client := gh_api.GenClient()
+	gh_api.GenClient()
 
 	for {
 		// Getting account information
-		rawAccountData := account.GetData(client)
+		rawAccountData := account.GetData()
 		formattedAccountData := account.CleanData(rawAccountData)
+		db.ResetTable(account.TableName)
 		account.Insert(formattedAccountData)
+
+		for _, project := range gitHubProjects {
+			rawProjectData := projects.GetData(project.Name, project.Owner)
+			fmt.Println(rawProjectData)
+		}
 
 		time.Sleep(5 * time.Minute)
 	}

@@ -7,7 +7,7 @@ import (
 )
 
 // Delete and create a given table
-func ResetTable(createQuery string, tableName string) {
+func HardResetTable(createQuery string, tableName string) {
 	if tableExists(tableName) {
 		_, err := DB.Exec(fmt.Sprintf("DROP TABLE %v;", tableName))
 		lumber.Fatal(err, "Failed to delete table", tableName)
@@ -16,6 +16,12 @@ func ResetTable(createQuery string, tableName string) {
 	_, err := DB.Exec(createQuery)
 	lumber.Fatal(err, "Failed to create table", tableName)
 	lumber.Info("Created table", tableName)
+}
+
+// Reset a given table via a truncate
+func ResetTable(tableName string) {
+	_, err := DB.Exec(fmt.Sprintf("TRUNCATE TABLE %v;", tableName))
+	lumber.Fatal(err, "Failed to truncate table", tableName)
 }
 
 // Checking if the table exists
