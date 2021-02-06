@@ -49,6 +49,10 @@ dev-start:
 	docker-compose up -d pgweb
 	docker-compose up github_scraper
 
+dev-reset:
+	docker-compose down
+	docker system prune -a
+
 ##########
 # Grouping
 ##########
@@ -61,3 +65,5 @@ local-lint: lint-golangci lint-hadolint lint-gomod
 docker-lint: lint-in-docker
 # Build
 local-build: build-docker-prod build-docker-dev build-docker-dev-lint
+# Local development
+dev-reboot: dev-reset dev-start
