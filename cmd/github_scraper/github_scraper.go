@@ -39,6 +39,7 @@ func main() {
 	gh_api.GenClient()
 	resetTables()
 	setInitialValues()
+	pause()
 	runCycles()
 }
 
@@ -70,8 +71,7 @@ func runCycles() {
 		// Getting account information
 		rawAccountData := account.GetData()
 		formattedAccountData := account.CleanData(rawAccountData)
-		db.ResetTable(account.TableName)
-		account.Insert(formattedAccountData)
+		account.Update(formattedAccountData)
 
 		// Getting project information
 		db.ResetTable(projects.TableName)
@@ -81,11 +81,15 @@ func runCycles() {
 			projects.Insert(formattedProjectData)
 		}
 
-		// Pausing for next run
-		if os.Getenv("DEV_UPDATE_TIME") == "true" {
-			time.Sleep(15 * time.Second)
-		} else {
-			time.Sleep(5 * time.Minute)
-		}
+		pause()
+	}
+}
+
+func pause() {
+	// Pausing for next run
+	if os.Getenv("DEV_UPDATE_TIME") == "true" {
+		time.Sleep(15 * time.Second)
+	} else {
+		time.Sleep(5 * time.Minute)
 	}
 }

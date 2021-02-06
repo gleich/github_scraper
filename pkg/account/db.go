@@ -57,5 +57,38 @@ func Insert(data Data) {
 		data.Company,
 	))
 	lumber.Error(err, "Failed to update", TableName, "with latest information")
-	lumber.Success("Updated", TableName, "with latest data")
+	lumber.Success("Initialized", TableName, "with latest data")
+}
+
+// Update the account information in the database
+func Update(data Data) {
+	_, err := db.DB.Exec(fmt.Sprintf(
+		`
+		UPDATE %v
+
+		SET followers = %v,
+		    email = '%s',
+			username = '%s',
+			repos = %v,
+			contributions = %v,
+			hireable = %v,
+			location = '%s',
+			organizations = %v,
+			website = '%s',
+			company = '%s'
+		`,
+		TableName,
+		data.Followers,
+		data.Email,
+		data.Username,
+		data.Repos,
+		data.Contributions,
+		data.Hireable,
+		data.Location,
+		data.Organizations,
+		data.Website,
+		data.Company,
+	))
+	lumber.Error(err, "Failed to update", TableName, "with most recent values")
+	lumber.Success("Updated", TableName, "with most recent values")
 }
