@@ -6,7 +6,6 @@ import (
 
 	"github.com/Matt-Gleich/github_scraper/pkg/account"
 	"github.com/Matt-Gleich/github_scraper/pkg/db"
-	"github.com/Matt-Gleich/github_scraper/pkg/gh_api"
 	"github.com/Matt-Gleich/github_scraper/pkg/projects"
 )
 
@@ -35,15 +34,36 @@ var gitHubProjects = []projects.Project{
 }
 
 func main() {
-	// Connecting to db and creating tables if they
-	// don't already exist
 	db.Connect()
+	resetTables()
+	setInitialValues()
+	runCycles()
+}
+
+// Reset tables in the database
+func resetTables() {
 	for _, table := range tables {
-		db.SafeCreate(table.CreateQuery, table.Name)
+		db.HardResetTable(table.CreateQuery, table.Name)
 	}
+}
 
-	gh_api.GenClient()
+// Set initial values in the database
+func setInitialValues() {
+	// Account information
+	rawAccountData := account.GetData()
+	formattedAccountData := account.CleanData(rawAccountData)
+	account.Insert(formattedAccountData)
 
+	// Projects
+	for _, project := range gitHubProjects {
+		rawProjectData := projects.GetData(project.Name, project.Owner)
+		formattedProjectData := projects.CleanData(rawProjectData)
+		projects.Insert(formattedProjectData)
+	}
+}
+
+// Run the update cycles
+func runCycles() {
 	for {
 		// Getting account information
 		rawAccountData := account.GetData()
@@ -59,6 +79,7 @@ func main() {
 			projects.Insert(formattedProjectData)
 		}
 
+		// Pausing for next run
 		if os.Getenv("DEV_UPDATE_TIME") == "true" {
 			time.Sleep(15 * time.Second)
 		} else {
