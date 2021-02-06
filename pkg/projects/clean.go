@@ -4,6 +4,8 @@ package projects
 func CleanData(apiData ApiData) Data {
 	return Data{
 		Name:          string(apiData.Repository.Name),
+		Owner:         string(apiData.Repository.Owner.Login),
+		NameWithOwner: string(apiData.Repository.NameWithOwner),
 		URL:           string(apiData.Repository.Url),
 		MainLangName:  string(apiData.Repository.PrimaryLanguage.Name),
 		MainLangColor: string(apiData.Repository.PrimaryLanguage.Color),

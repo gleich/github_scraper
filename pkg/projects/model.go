@@ -11,9 +11,13 @@ type Project struct {
 // Data from github
 type ApiData struct {
 	Repository struct {
-		Name       githubv4.String
-		Url        githubv4.String
-		Stargazers struct {
+		Name  githubv4.String
+		Owner struct {
+			Login githubv4.String
+		}
+		NameWithOwner githubv4.String
+		Url           githubv4.String
+		Stargazers    struct {
 			TotalCount githubv4.Int
 		}
 		Description     githubv4.String
@@ -27,6 +31,8 @@ type ApiData struct {
 // A GitHub Project
 type Data struct {
 	Name          string
+	Owner         string
+	NameWithOwner string
 	URL           string
 	MainLangName  string
 	MainLangColor string
