@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"time"
 
 	"github.com/Matt-Gleich/github_scraper/pkg/account"
@@ -58,6 +59,10 @@ func main() {
 			projects.Insert(formattedProjectData)
 		}
 
-		time.Sleep(5 * time.Minute)
+		if os.Getenv("DEV_UPDATE_TIME") == "true" {
+			time.Sleep(15 * time.Second)
+		} else {
+			time.Sleep(5 * time.Minute)
+		}
 	}
 }
