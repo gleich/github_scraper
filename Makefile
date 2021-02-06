@@ -45,7 +45,9 @@ test-in-docker: build-docker-dev
 ###################
 
 dev-start:
-	docker-compose up -d postgres && docker-compose up -d pgweb && docker-compose up github_scraper
+	docker-compose up -d postgres
+	docker-compose up -d pgweb
+	docker-compose up github_scraper
 
 ##########
 # Grouping
