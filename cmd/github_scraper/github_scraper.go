@@ -24,6 +24,13 @@ var tables = []db.Table{
 // All projects
 var gitHubProjects = []projects.Project{
 	{Name: "fgh", Owner: "Matt-Gleich"},
+	{Name: "api", Owner: "Matt-Gleich"},
+	{Name: "cihat", Owner: "Matt-Gleich"},
+	{Name: "awesome_hackclub_auto", Owner: "hackclub"},
+	{Name: "dots", Owner: "Matt-Gleich"},
+	{Name: "nuke", Owner: "Matt-Gleich"},
+	{Name: "import_sorter", Owner: "fluttercommunity"},
+	{Name: "lumber", Owner: "Matt-Gleich"},
 }
 
 func main() {
@@ -42,10 +49,11 @@ func main() {
 		db.ResetTable(account.TableName)
 		account.Insert(formattedAccountData)
 
+		// Getting project information
+		db.ResetTable(projects.TableName)
 		for _, project := range gitHubProjects {
 			rawProjectData := projects.GetData(project.Name, project.Owner)
 			formattedProjectData := projects.CleanData(rawProjectData)
-			db.ResetTable(projects.TableName)
 			projects.Insert(formattedProjectData)
 		}
 
