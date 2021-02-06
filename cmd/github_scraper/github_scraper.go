@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/Matt-Gleich/github_scraper/pkg/account"
@@ -46,8 +45,8 @@ func main() {
 		for _, project := range gitHubProjects {
 			rawProjectData := projects.GetData(project.Name, project.Owner)
 			formattedProjectData := projects.CleanData(rawProjectData)
-			fmt.Println(formattedProjectData)
 			db.ResetTable(projects.TableName)
+			projects.Insert(formattedProjectData)
 		}
 
 		time.Sleep(5 * time.Minute)

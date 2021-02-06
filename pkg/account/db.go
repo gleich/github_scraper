@@ -27,10 +27,11 @@ CREATE TABLE %v (
 );`, TableName,
 )
 
+// Insert data into the database
 func Insert(data Data) {
-	// Inserting data
 	_, err := db.DB.Exec(fmt.Sprintf(
-		` INSERT INTO %v (followers,
+		` INSERT INTO %v (
+			followers,
 			email,
 			username,
 			repos,
