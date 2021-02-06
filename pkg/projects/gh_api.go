@@ -9,6 +9,8 @@ import (
 )
 
 func GetData(name string, owner string) ApiData {
+	lumber.Info("Getting project info for", owner, "/", name)
+
 	variables := map[string]interface{}{
 		"owner": githubv4.String(owner),
 		"name":  githubv4.String(name),

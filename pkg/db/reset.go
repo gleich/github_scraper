@@ -18,12 +18,6 @@ func HardResetTable(createQuery string, tableName string) {
 	lumber.Info("Created table", tableName)
 }
 
-// Reset a given table via a truncate
-func ResetTable(tableName string) {
-	_, err := DB.Exec(fmt.Sprintf("TRUNCATE TABLE %v;", tableName))
-	lumber.Fatal(err, "Failed to truncate table", tableName)
-}
-
 // Checking if the table exists
 func tableExists(tName string) bool {
 	var (

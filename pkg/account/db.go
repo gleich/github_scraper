@@ -75,7 +75,7 @@ func Update(data Data) {
 			location = '%s',
 			organizations = %v,
 			website = '%s',
-			company = '%s'
+			company = '%s';
 		`,
 		TableName,
 		data.Followers,

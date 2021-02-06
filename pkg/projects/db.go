@@ -44,6 +44,34 @@ func Insert(data Data) {
 		data.Description,
 		data.Stars,
 	))
-	lumber.Error(err, "Failed to update", TableName, "with latest information")
-	lumber.Success("Updated", TableName, "with latest data")
+	lumber.Error(err, "Failed to update", TableName, "with latest values for", data.Name)
+	lumber.Success("Initialized", TableName, "with latest data for", data.Name)
+}
+
+// Update the values for a certain project
+func Update(data Data) {
+	_, err := db.DB.Exec(fmt.Sprintf(
+		`
+		UPDATE %v
+
+		SET pname = '%s',
+			url = '%s',
+			main_lang_name = '%s',
+			main_lang_color = '%s',
+			description = '%s',
+			stars = %v
+
+		WHERE pname = '%s';
+		`,
+		TableName,
+		data.Name,
+		data.URL,
+		data.MainLangName,
+		data.MainLangColor,
+		data.Description,
+		data.Stars,
+		data.Name,
+	))
+	lumber.Error(err, "Failed to update", TableName, "with most recent values for", data.Name)
+	lumber.Success("Updated", TableName, "with most recent values for", data.Name)
 }

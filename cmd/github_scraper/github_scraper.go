@@ -74,17 +74,17 @@ func runCycles() {
 		account.Update(formattedAccountData)
 
 		// Getting project information
-		db.ResetTable(projects.TableName)
 		for _, project := range gitHubProjects {
 			rawProjectData := projects.GetData(project.Name, project.Owner)
 			formattedProjectData := projects.CleanData(rawProjectData)
-			projects.Insert(formattedProjectData)
+			projects.Update(formattedProjectData)
 		}
 
 		pause()
 	}
 }
 
+// Provide a time buffer
 func pause() {
 	// Pausing for next run
 	if os.Getenv("DEV_UPDATE_TIME") == "true" {
