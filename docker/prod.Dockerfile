@@ -16,5 +16,13 @@ RUN go build -o app ./cmd/github_scraper
 
 # hadolint ignore=DL3006,DL3007
 FROM alpine:latest
+
+# Set timezone to EST
+ENV TZ=America/New_York
+# hadolint ignore=DL3018
+RUN apk update && apk add tzdata --no-cache
+RUN echo "America/New_York" > /etc/timezone
+
 COPY --from=builder /usr/src/app/app .
+
 CMD ["./app"]
