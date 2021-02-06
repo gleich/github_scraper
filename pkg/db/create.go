@@ -7,11 +7,10 @@ import (
 )
 
 // Delete and create a given table
-func HardResetTable(createQuery string, tableName string) {
+func SafeCreate(createQuery string, tableName string) {
 	if tableExists(tableName) {
-		_, err := DB.Exec(fmt.Sprintf("DROP TABLE %v;", tableName))
-		lumber.Fatal(err, "Failed to delete table", tableName)
-		lumber.Info("Deleted table", tableName)
+		lumber.Info(tableName, "already exists")
+		return
 	}
 	_, err := DB.Exec(createQuery)
 	lumber.Fatal(err, "Failed to create table", tableName)

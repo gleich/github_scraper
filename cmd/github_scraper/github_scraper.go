@@ -34,10 +34,11 @@ var gitHubProjects = []projects.Project{
 }
 
 func main() {
-	// Connecting to db and resetting tables
+	// Connecting to db and creating tables if they
+	// don't already exist
 	db.Connect()
 	for _, table := range tables {
-		db.HardResetTable(table.CreateQuery, table.Name)
+		db.SafeCreate(table.CreateQuery, table.Name)
 	}
 
 	gh_api.GenClient()
