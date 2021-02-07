@@ -15,8 +15,4 @@ RUN go get -v -t -d ./...
 RUN go get -u github.com/cosmtrek/air
 ENV air_wd /usr/src/app/
 
-# Set timezone to EST
-ENV TZ=America/New_York
-RUN echo "America/New_York" > /etc/timezone
-
 CMD [ "air", "-c", ".air.toml" ]
