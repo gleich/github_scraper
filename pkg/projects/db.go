@@ -29,8 +29,8 @@ CREATE TABLE %v (
 
 // Insert data into the database
 func Insert(data Project) {
-	_, err := db.DB.Exec(`
-		 INSERT INTO github_projects (
+	_, err := db.DB.Exec(fmt.Sprintf(`
+		INSERT INTO %v (
 			pname_with_owner,
 			pname,
 			powner,
@@ -46,7 +46,7 @@ func Insert(data Project) {
 				$7::varchar, $8::varchar, $9::varchar,
 				$10::int
 			);
-		`,
+		`, TableName),
 		data.NameWithOwner,
 		data.Name,
 		data.Owner,
@@ -64,8 +64,8 @@ func Insert(data Project) {
 
 // Update the values for a certain project
 func Update(data Project) {
-	_, err := db.DB.Exec(`
-		UPDATE github_projects
+	_, err := db.DB.Exec(fmt.Sprintf(`
+		UPDATE %v
 
 		SET pname_with_owner = $1::varchar,
 			pname = $2::varchar,
@@ -79,7 +79,7 @@ func Update(data Project) {
 			stars = $10::int
 
 		WHERE pname_with_owner = $11::varchar;
-		`,
+		`, TableName),
 		data.NameWithOwner,
 		data.Name,
 		data.Owner,
