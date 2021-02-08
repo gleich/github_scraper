@@ -22,18 +22,6 @@ var tables = []db.Table{
 	},
 }
 
-// All projects
-var gitHubProjects = []projects.Project{
-	{Name: "fgh", Owner: "Matt-Gleich"},
-	{Name: "api", Owner: "Matt-Gleich"},
-	{Name: "cihat", Owner: "Matt-Gleich"},
-	{Name: "awesome_hackclub_auto", Owner: "hackclub"},
-	{Name: "dots", Owner: "Matt-Gleich"},
-	{Name: "nuke", Owner: "Matt-Gleich"},
-	{Name: "import_sorter", Owner: "fluttercommunity"},
-	{Name: "lumber", Owner: "Matt-Gleich"},
-}
-
 func main() {
 	db.Connect()
 	gh_api.GenClient()
@@ -53,31 +41,39 @@ func resetTables() {
 // Set initial values in the database
 func setInitialValues() {
 	// Account information
-	rawAccountData := account.GetData()
-	formattedAccountData := account.CleanData(rawAccountData)
-	account.Insert(formattedAccountData)
+	var (
+		rawAccountData = account.GetData()
+		githubAccount  = account.CleanData(rawAccountData)
+	)
+	account.Insert(githubAccount)
 
 	// Projects
-	for _, project := range gitHubProjects {
-		rawProjectData := projects.GetData(project.Name, project.Owner)
-		formattedProjectData := projects.CleanData(rawProjectData)
-		projects.Insert(formattedProjectData)
+	var (
+		projectData    = projects.GetData()
+		githubProjects = projects.CleanData(projectData)
+	)
+	for _, project := range githubProjects {
+		projects.Insert(project)
 	}
 }
 
 // Run the update cycles
 func runCycles() {
 	for {
-		// Getting account information
-		rawAccountData := account.GetData()
-		formattedAccountData := account.CleanData(rawAccountData)
-		account.Update(formattedAccountData)
+		// Account information
+		var (
+			rawAccountData = account.GetData()
+			githubAccount  = account.CleanData(rawAccountData)
+		)
+		account.Update(githubAccount)
 
-		// Getting project information
-		for _, project := range gitHubProjects {
-			rawProjectData := projects.GetData(project.Name, project.Owner)
-			formattedProjectData := projects.CleanData(rawProjectData)
-			projects.Update(formattedProjectData)
+		// Projects
+		var (
+			projectData    = projects.GetData()
+			githubProjects = projects.CleanData(projectData)
+		)
+		for _, project := range githubProjects {
+			projects.Update(project)
 		}
 
 		pause()
