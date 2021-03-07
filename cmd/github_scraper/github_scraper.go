@@ -10,17 +10,25 @@ import (
 	"github.com/Matt-Gleich/github_scraper/pkg/projects"
 )
 
-// All SQL tables used by this microservice
-var tables = []db.Table{
-	{
-		Name:        account.TableName,
-		CreateQuery: account.CreateQuery,
-	},
-	{
-		Name:        projects.TableName,
-		CreateQuery: projects.CreateQuery,
-	},
-}
+var (
+	// All SQL tables used by this microservice
+	tables = []db.Table{
+		{
+			Name:        account.TableName,
+			CreateQuery: account.CreateQuery,
+		},
+		{
+			Name:        projects.TableName,
+			CreateQuery: projects.CreateQuery,
+		},
+	}
+
+	// GitHub projects to store in the database
+	gitHubProjects = map[string][]string{
+		"Matt-Gleich": {"api", "github_scraper", "fgh", "dots", "lumber", "site-v2"},
+		"hackclub":    {"awesome_hackclub_auto"},
+	}
+)
 
 func main() {
 	db.Connect()
@@ -48,12 +56,14 @@ func setInitialValues() {
 	account.Insert(githubAccount)
 
 	// Projects
-	var (
-		projectData    = projects.GetData()
-		githubProjects = projects.CleanData(projectData)
-	)
-	for _, project := range githubProjects {
-		projects.Insert(project)
+	for owner, repos := range gitHubProjects {
+		for _, repo := range repos {
+			var (
+				rawProjectData = projects.GetData(owner, repo)
+				projectData    = projects.CleanData(rawProjectData)
+			)
+			projects.Insert(projectData)
+		}
 	}
 }
 
@@ -68,12 +78,14 @@ func runCycles() {
 		account.Update(githubAccount)
 
 		// Projects
-		var (
-			projectData    = projects.GetData()
-			githubProjects = projects.CleanData(projectData)
-		)
-		for _, project := range githubProjects {
-			projects.Update(project)
+		for owner, repos := range gitHubProjects {
+			for _, repo := range repos {
+				var (
+					rawProjectData = projects.GetData(owner, repo)
+					projectData    = projects.CleanData(rawProjectData)
+				)
+				projects.Update(projectData)
+			}
 		}
 
 		pause()
