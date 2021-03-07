@@ -10,11 +10,15 @@ import (
 func HardResetTable(createQuery string, tableName string) {
 	if tableExists(tableName) {
 		_, err := DB.Exec(fmt.Sprintf("DROP TABLE %v;", tableName))
-		lumber.Fatal(err, "Failed to delete table", tableName)
+		if err != nil {
+			lumber.Fatal(err, "Failed to delete table", tableName)
+		}
 		lumber.Info("Deleted table", tableName)
 	}
 	_, err := DB.Exec(createQuery)
-	lumber.Fatal(err, "Failed to create table", tableName, "\n", createQuery)
+	if err != nil {
+		lumber.Fatal(err, "Failed to create table", tableName, "\n", createQuery)
+	}
 	lumber.Info("Created table", tableName)
 }
 
@@ -25,6 +29,8 @@ func tableExists(tName string) bool {
 		query  = fmt.Sprintf("SELECT EXISTS (SELECT FROM pg_tables WHERE tablename = '%s');", tName)
 	)
 	err := DB.QueryRow(query).Scan(&exists)
-	lumber.Fatal(err, "Failed to check if table exists")
+	if err != nil {
+		lumber.Fatal(err, "Failed to check if table exists")
+	}
 	return exists
 }
