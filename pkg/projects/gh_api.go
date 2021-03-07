@@ -8,6 +8,7 @@ import (
 	"github.com/shurcooL/githubv4"
 )
 
+// Get the data for a project
 func GetData(owner string, name string) ApiData {
 	lumber.Info("Getting project data")
 

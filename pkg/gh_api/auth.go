@@ -9,6 +9,7 @@ import (
 	"golang.org/x/oauth2"
 )
 
+// A GitHub api v4 client
 var Client *githubv4.Client
 
 // Generate a github api v4 client
