@@ -13,7 +13,9 @@ func GetData() ApiData {
 
 	var data ApiData
 	err := gh_api.Client.Query(context.Background(), &data, nil)
-	lumber.Error(err, "Failed to get github account data")
+	if err != nil {
+		lumber.Error(err, "Failed to get github account data")
+	}
 
 	return data
 }

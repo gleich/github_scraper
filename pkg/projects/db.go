@@ -58,7 +58,15 @@ func Insert(data Project) {
 		data.CreatedAt,
 		data.Stars,
 	)
-	lumber.Error(err, "Failed to update", TableName, "with latest values for", data.NameWithOwner)
+	if err != nil {
+		lumber.Error(
+			err,
+			"Failed to update",
+			TableName,
+			"with latest values for",
+			data.NameWithOwner,
+		)
+	}
 	lumber.Success("Initialized", TableName, "with latest data for", data.NameWithOwner)
 }
 
@@ -92,6 +100,14 @@ func Update(data Project) {
 		data.Stars,
 		data.NameWithOwner,
 	)
-	lumber.Error(err, "Failed to update", TableName, "with most recent values for", data.NameWithOwner)
+	if err != nil {
+		lumber.Error(
+			err,
+			"Failed to update",
+			TableName,
+			"with most recent values for",
+			data.NameWithOwner,
+		)
+	}
 	lumber.Success("Updated", TableName, "with most recent values for", data.NameWithOwner)
 }

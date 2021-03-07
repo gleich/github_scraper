@@ -8,6 +8,7 @@ import (
 	"github.com/Matt-Gleich/github_scraper/pkg/db"
 	"github.com/Matt-Gleich/github_scraper/pkg/gh_api"
 	"github.com/Matt-Gleich/github_scraper/pkg/projects"
+	"github.com/Matt-Gleich/lumber"
 )
 
 var (
@@ -31,6 +32,8 @@ var (
 )
 
 func main() {
+	lumber.ErrNilCheck = false
+
 	db.Connect()
 	gh_api.GenClient()
 	resetTables()

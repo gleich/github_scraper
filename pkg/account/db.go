@@ -59,7 +59,9 @@ func Insert(data Data) {
 		data.Website,
 		data.Company,
 	)
-	lumber.Error(err, "Failed to update", TableName, "with latest information")
+	if err != nil {
+		lumber.Error(err, "Failed to update", TableName, "with latest information")
+	}
 	lumber.Success("Initialized", TableName, "with latest data")
 }
 
@@ -91,6 +93,8 @@ func Update(data Data) {
 		data.Website,
 		data.Company,
 	)
-	lumber.Error(err, "Failed to update", TableName, "with most recent values")
+	if err != nil {
+		lumber.Error(err, "Failed to update", TableName, "with most recent values")
+	}
 	lumber.Success("Updated", TableName, "with most recent values")
 }

@@ -17,7 +17,9 @@ func GetData(owner string, name string) ApiData {
 		&data,
 		map[string]interface{}{"owner": githubv4.String(owner), "name": githubv4.String(name)},
 	)
-	lumber.Error(err, "Failed to get project data")
+	if err != nil {
+		lumber.Error(err, "Failed to get project data")
+	}
 
 	return data
 }
