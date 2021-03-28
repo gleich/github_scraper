@@ -26,7 +26,7 @@ var (
 
 	// GitHub projects to store in the database
 	gitHubProjects = map[string][]string{
-		"Matt-Gleich": {"api", "github_scraper", "fgh", "dots", "lumber", "site-v2"},
+		"Matt-Gleich": {"api", "github_scraper", "fgh", "dots", "lumber", "site-v2", "blackbird"},
 		"hackclub":    {"awesome_hackclub_auto"},
 	}
 )
