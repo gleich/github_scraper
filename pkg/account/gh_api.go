@@ -3,8 +3,8 @@ package account
 import (
 	"context"
 
-	"github.com/Matt-Gleich/github_scraper/pkg/gh_api"
-	"github.com/Matt-Gleich/lumber"
+	"github.com/gleich/github_scraper/pkg/gh_api"
+	"github.com/gleich/lumber"
 )
 
 // Get account data from GitHub

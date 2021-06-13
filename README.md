@@ -4,14 +4,14 @@
 
 🗄  GitHub scraper for my GraphQL API
 
-![build](https://github.com/Matt-Gleich/github_scraper/workflows/build/badge.svg)
-![test](https://github.com/Matt-Gleich/github_scraper/workflows/test/badge.svg)
-![lint](https://github.com/Matt-Gleich/github_scraper/workflows/lint/badge.svg)
-![deploy](https://github.com/Matt-Gleich/github_scraper/workflows/deploy/badge.svg)
+![build](https://github.com/gleich/github_scraper/workflows/build/badge.svg)
+![test](https://github.com/gleich/github_scraper/workflows/test/badge.svg)
+![lint](https://github.com/gleich/github_scraper/workflows/lint/badge.svg)
+![deploy](https://github.com/gleich/github_scraper/workflows/deploy/badge.svg)
 
 ## 🙌 Contributing
 
-Before contributing please read the [CONTRIBUTING.md file](https://github.com/Matt-Gleich/github_scraper/blob/master/CONTRIBUTING.md).
+Before contributing please read the [CONTRIBUTING.md file](https://github.com/gleich/github_scraper/blob/master/CONTRIBUTING.md).
 
 <!-- DO NOT REMOVE - contributor_list:start -->
 ## 👥 Contributors

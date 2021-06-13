@@ -4,7 +4,7 @@ import (
 	"context"
 	"os"
 
-	"github.com/Matt-Gleich/lumber"
+	"github.com/gleich/lumber"
 	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"
 )

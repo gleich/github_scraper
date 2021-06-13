@@ -3,8 +3,8 @@ package account
 import (
 	"fmt"
 
-	"github.com/Matt-Gleich/github_scraper/pkg/db"
-	"github.com/Matt-Gleich/lumber"
+	"github.com/gleich/github_scraper/pkg/db"
+	"github.com/gleich/lumber"
 )
 
 // Table name for the account info
