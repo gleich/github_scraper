@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/gleich/lumber"
+	"github.com/gleich/lumber/v2"
 )
 
 // Delete and create a given table

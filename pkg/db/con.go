@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/gleich/lumber"
+	"github.com/gleich/lumber/v2"
 	_ "github.com/lib/pq"
 )
 

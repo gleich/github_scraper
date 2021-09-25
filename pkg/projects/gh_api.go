@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/gleich/github_scraper/pkg/gh_api"
-	"github.com/gleich/lumber"
+	"github.com/gleich/lumber/v2"
 	"github.com/shurcooL/githubv4"
 )
 

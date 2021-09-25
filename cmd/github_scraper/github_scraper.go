@@ -8,7 +8,6 @@ import (
 	"github.com/gleich/github_scraper/pkg/db"
 	"github.com/gleich/github_scraper/pkg/gh_api"
 	"github.com/gleich/github_scraper/pkg/projects"
-	"github.com/gleich/lumber"
 )
 
 var (
@@ -26,14 +25,12 @@ var (
 
 	// GitHub projects to store in the database
 	gitHubProjects = map[string][]string{
-		"gleich": {"api", "github_scraper", "fgh", "dots", "lumber", "site-v2", "blackbird"},
-		"hackclub":    {"awesome_hackclub_auto"},
+		"gleich":   {"api", "github_scraper", "fgh", "dots", "lumber", "site-v2", "blackbird"},
+		"hackclub": {"awesome_hackclub_auto"},
 	}
 )
 
 func main() {
-	lumber.ErrNilCheck = false
-
 	db.Connect()
 	gh_api.GenClient()
 	resetTables()

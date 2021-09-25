@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gleich/github_scraper/pkg/db"
-	"github.com/gleich/lumber"
+	"github.com/gleich/lumber/v2"
 )
 
 // Table name for projects
