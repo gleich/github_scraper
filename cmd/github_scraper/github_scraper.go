@@ -8,6 +8,8 @@ import (
 	"github.com/gleich/github_scraper/pkg/db"
 	"github.com/gleich/github_scraper/pkg/gh_api"
 	"github.com/gleich/github_scraper/pkg/projects"
+	"github.com/gleich/lumber/v2"
+	"github.com/go-co-op/gocron"
 )
 
 var (
@@ -33,9 +35,8 @@ func main() {
 	db.Connect()
 	gh_api.GenClient()
 	resetTables()
-	setInitialValues()
-	pause()
-	runCycles()
+	cycle(account.Insert, projects.Insert)
+	scheduledCycles()
 }
 
 // Reset tables in the database
@@ -45,63 +46,47 @@ func resetTables() {
 	}
 }
 
-// Set initial values in the database
-func setInitialValues() {
+func cycle(accountSQLFunc func(account.Data), projectsSQLFunc func(projects.RepositoryData)) {
 	// Account information
 	var (
 		rawAccountData = account.GetData()
 		githubAccount  = account.CleanData(rawAccountData)
 	)
-	account.Insert(githubAccount)
+	accountSQLFunc(githubAccount)
 
 	// My projects
 	personalRepos := projects.GetProjectsData(githubAccount)
 	for _, project := range personalRepos {
-		projects.Insert(project)
+		projectsSQLFunc(project)
 	}
 
 	// Additional projects
 	for owner, repos := range extraGitHubProjects {
 		for _, repo := range repos {
 			projectData := projects.GetProjectData(owner, repo)
-			projects.Insert(projectData)
+			projectsSQLFunc(projectData)
 		}
 	}
 }
 
-// Run the update cycles
-func runCycles() {
-	for {
-		// Account information
-		var (
-			rawAccountData = account.GetData()
-			githubAccount  = account.CleanData(rawAccountData)
-		)
-		account.Update(githubAccount)
-		// My projects
-		personalRepos := projects.GetProjectsData(githubAccount)
-		for _, project := range personalRepos {
-			projects.Update(project)
-		}
-
-		// Additional projects
-		for owner, repos := range extraGitHubProjects {
-			for _, repo := range repos {
-				projectData := projects.GetProjectData(owner, repo)
-				projects.Update(projectData)
-			}
-		}
-
-		pause()
+func scheduledCycles() {
+	s := gocron.NewScheduler(time.UTC)
+	scheduledCycle := func() {
+		cycle(account.Update, projects.Update)
 	}
-}
 
-// Provide a time buffer
-func pause() {
-	// Pausing for next run
 	if os.Getenv("DEV_UPDATE_TIME") == "true" {
-		time.Sleep(15 * time.Second)
+		_, err := s.Every(5).Seconds().Do(scheduledCycle)
+		if err != nil {
+			lumber.Error(err, "Failed to start scheduled cycle for every 5 seconds")
+		}
 	} else {
-		time.Sleep(5 * time.Minute)
+		_, err := s.Every(5).Minutes().Do(scheduledCycle)
+		if err != nil {
+			lumber.Error(err, "Failed to start scheduled cycle for every 5 minutes")
+		}
 	}
+
+	lumber.Success("Setup scheduler")
+	s.StartBlocking()
 }
