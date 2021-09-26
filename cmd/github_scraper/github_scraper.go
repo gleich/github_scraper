@@ -35,7 +35,7 @@ func main() {
 	resetTables()
 	setInitialValues()
 	pause()
-	// runCycles()
+	runCycles()
 }
 
 // Reset tables in the database
