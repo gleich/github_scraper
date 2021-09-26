@@ -49,8 +49,8 @@ github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7
 github.com/fatih/color v1.10.0/go.mod h1:ELkj/draVOlAH/xkhN6mQ50Qd0MPOk5AAr3maGEBuJM=
 github.com/fatih/color v1.13.0 h1:8LOYc1KYPPmyKMuN8QV2DNRWNbLo6LZ0iLs8+mlH53w=
 github.com/fatih/color v1.13.0/go.mod h1:kLAiJbzzSOZDVNGyDpeOxJ47H46qBXwg5ILebYFFOfk=
-github.com/gleich/lumber/v2 v2.1.1 h1:5c2BC6oLDRWAhQsj7bXWRWbXe/HS98EeR6qugvRtzWE=
-github.com/gleich/lumber/v2 v2.1.1/go.mod h1:pkfSf79z7hol7GyiXlvjOP6SL0vCAtyK2blrluRcc78=
+github.com/gleich/lumber/v2 v2.1.2 h1:fzfrGXI2isMCtzgC2X/iyoWP7Pikx2939JV3m1IqZnk=
+github.com/gleich/lumber/v2 v2.1.2/go.mod h1:pkfSf79z7hol7GyiXlvjOP6SL0vCAtyK2blrluRcc78=
 github.com/go-co-op/gocron v1.9.0 h1:+V+DDenw3ryB7B+tK1bAIC5p0ruw4oX9IqAsdRnGIf0=
 github.com/go-co-op/gocron v1.9.0/go.mod h1:DbJm9kdgr1sEvWpHCA7dFFs/PGHPMil9/97EXCRPr4k=
 github.com/go-gl/glfw v0.0.0-20190409004039-e6da0acd62b1/go.mod h1:vR7hzQXu2zJy9AVAgeJqvqgH9Q5CA+iKCZ2gyEVpxRU=
