@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/fatih/color v1.13.0 // indirect
-	github.com/gleich/lumber/v2 v2.0.1
+	github.com/gleich/lumber/v2 v2.1.1
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/lib/pq v1.9.0
