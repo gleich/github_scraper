@@ -28,7 +28,7 @@ CREATE TABLE %v (
 )
 
 // Insert data into the database
-func Insert(data Project) {
+func Insert(data RepositoryData) {
 	_, err := db.DB.Exec(fmt.Sprintf(`
 		INSERT INTO %v (
 			pname_with_owner,
@@ -49,14 +49,14 @@ func Insert(data Project) {
 		`, TableName),
 		data.NameWithOwner,
 		data.Name,
-		data.Owner,
+		data.Owner.Login,
 		data.URL,
-		data.MainLangName,
-		data.MainLangColor,
+		data.PrimaryLanguage.Name,
+		data.PrimaryLanguage.Color,
 		data.Description,
-		data.LastPushAt,
-		data.CreatedAt,
-		data.Stars,
+		data.PushedAt.Time,
+		data.CreatedAt.Time,
+		data.StargazerCount,
 	)
 	if err != nil {
 		lumber.Error(
@@ -71,7 +71,7 @@ func Insert(data Project) {
 }
 
 // Update the values for a certain project
-func Update(data Project) {
+func Update(data RepositoryData) {
 	_, err := db.DB.Exec(fmt.Sprintf(`
 		UPDATE %v
 
@@ -90,14 +90,14 @@ func Update(data Project) {
 		`, TableName),
 		data.NameWithOwner,
 		data.Name,
-		data.Owner,
+		data.Owner.Login,
 		data.URL,
-		data.MainLangName,
-		data.MainLangColor,
+		data.PrimaryLanguage.Name,
+		data.PrimaryLanguage.Color,
 		data.Description,
-		data.LastPushAt,
-		data.CreatedAt,
-		data.Stars,
+		data.PushedAt.Time,
+		data.CreatedAt.Time,
+		data.StargazerCount,
 		data.NameWithOwner,
 	)
 	if err != nil {

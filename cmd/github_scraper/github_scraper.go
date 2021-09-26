@@ -24,8 +24,7 @@ var (
 	}
 
 	// GitHub projects to store in the database
-	gitHubProjects = map[string][]string{
-		"gleich":   {"api", "github_scraper", "fgh", "dots", "lumber", "site-v2", "blackbird"},
+	extraGitHubProjects = map[string][]string{
 		"hackclub": {"awesome_hackclub_auto"},
 	}
 )
@@ -36,7 +35,7 @@ func main() {
 	resetTables()
 	setInitialValues()
 	pause()
-	runCycles()
+	// runCycles()
 }
 
 // Reset tables in the database
@@ -55,13 +54,16 @@ func setInitialValues() {
 	)
 	account.Insert(githubAccount)
 
-	// Projects
-	for owner, repos := range gitHubProjects {
+	// My projects
+	personalRepos := projects.GetProjectsData(githubAccount)
+	for _, project := range personalRepos {
+		projects.Insert(project)
+	}
+
+	// Additional projects
+	for owner, repos := range extraGitHubProjects {
 		for _, repo := range repos {
-			var (
-				rawProjectData = projects.GetData(owner, repo)
-				projectData    = projects.CleanData(rawProjectData)
-			)
+			projectData := projects.GetProjectData(owner, repo)
 			projects.Insert(projectData)
 		}
 	}
@@ -76,14 +78,16 @@ func runCycles() {
 			githubAccount  = account.CleanData(rawAccountData)
 		)
 		account.Update(githubAccount)
+		// My projects
+		personalRepos := projects.GetProjectsData(githubAccount)
+		for _, project := range personalRepos {
+			projects.Update(project)
+		}
 
-		// Projects
-		for owner, repos := range gitHubProjects {
+		// Additional projects
+		for owner, repos := range extraGitHubProjects {
 			for _, repo := range repos {
-				var (
-					rawProjectData = projects.GetData(owner, repo)
-					projectData    = projects.CleanData(rawProjectData)
-				)
+				projectData := projects.GetProjectData(owner, repo)
 				projects.Update(projectData)
 			}
 		}

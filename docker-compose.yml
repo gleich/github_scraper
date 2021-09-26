@@ -17,11 +17,5 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: api
-  pgweb:
-    image: sosedoff/pgweb
     ports:
-      - '8081:8081'
-    environment:
-      DATABASE_URL: postgres://postgres:password@postgres:5432/api?sslmode=disable
-    depends_on:
-      - postgres
+      - '5432:5432'
