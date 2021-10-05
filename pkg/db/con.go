@@ -17,7 +17,7 @@ var DB *sql.DB
 func Connect() {
 	dbURL, err := url.Parse(os.Getenv("DB_URL"))
 	if err != nil {
-		lumber.Error(err, "Failed to get postgresql url")
+		lumber.Fatal(err, "Failed to parse postgresql url")
 	}
 	password, _ := dbURL.User.Password()
 
