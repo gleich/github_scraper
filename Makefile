@@ -50,7 +50,7 @@ dev-start:
 
 dev-reset:
 	docker-compose down
-	docker system prune -a
+	docker system prune -af
 
 ##########
 # Grouping
