@@ -25,11 +25,13 @@ func main() {
 
 	client := api.Client()
 
-	account, err := api.Account(client)
+	accountAPIData, err := api.Account(client)
 	if err != nil {
 		lumber.Fatal(err, "Failed to fetch initial account information")
 	}
-	database.Create(&account)
+
+	var account db.Account
+	database.FirstOrCreate(&account, accountAPIData)
 
 	s := gocron.NewScheduler(time.UTC)
 
